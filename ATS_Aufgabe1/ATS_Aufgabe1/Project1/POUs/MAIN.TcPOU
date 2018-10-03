@@ -1,13 +1,21 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.36">
-  <POU Name="MAIN" Id="{5ae01858-891f-40dd-8569-644809c3b85e}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{5ae01858-891f-40dd-8569-644809c3b85e}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	B_myByte : BYTE := 128;					// BYTE = 8 Bit Speicherplatz (0 bis 255)
+	i_myInterger : INT := -1000;			// INT = 16 Bit Speihcerplatz (-32768 bis 32767)
+	ui_myUnsignedInteger : UINT := 5000;	// UINT = 16 Bit Speicherplatz (0 bis 65535)	
+	w_myWord : WORD := 65535;				// WORD = 16 Bit Speicherplatz (0 bis 65535)
+	b_myBool : BOOL := TRUE;				// BOOL = 8 Bit Speicherplatz
 END_VAR
-]]>
-    </Declaration>
+
+    ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>
