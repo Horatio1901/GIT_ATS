@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
   <POU Name="AdditionFunction" Id="{038f9d96-1cd4-4a69-88de-008e482696ef}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION AdditionFunction : INT
+    <Declaration><![CDATA[FUNCTION AdditionFunction : REAL
 VAR_INPUT
-	i_valueA : INT := 0;
-	i_valueB : INT := 0;
-END_VAR
-VAR
+	i_valueA : REAL;
+	i_valueB : REAL;
 END_VAR
 ]]></Declaration>
     <Implementation>

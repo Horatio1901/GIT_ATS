@@ -4,18 +4,32 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	B_myByte : BYTE := 128;					// BYTE = 8 Bit Speicherplatz (0 bis 255)
-	i_myInterger : INT := -1000;			// INT = 16 Bit Speihcerplatz (-32768 bis 32767)
+	r_myReal : REAL := 0.0;			// INT = 16 Bit Speihcerplatz (-32768 bis 32767)
 	ui_myUnsignedInteger : UINT := 5000;	// UINT = 16 Bit Speicherplatz (0 bis 65535)	
 	w_myWord : WORD := 65535;				// WORD = 16 Bit Speicherplatz (0 bis 65535)
 	b_myBool : BOOL := TRUE;				// BOOL = 8 Bit Speicherplatz
+	i_valueA: REAL;
+	i_valueB: REAL;
+	i_myResultMinus: INT;
+	l_resultFak: LINT;
 END_VAR
 
     ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[B_myByte := 100;
+
+//r_myReal := AdditionFunction(i_valueA := 12.43, i_valueB := 1.02);
+//i_myResultMinus := SubtractionFunction(i_valueA := 200, i_valueB := 20);
+DoSomeMath(r_InputA := i_valueA := 12, r_InputB := 3.4);
+l_resultFak := Fakultaet(i_fakultat := 10);
+]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
+      <LineId Id="17" Count="1" />
       <LineId Id="2" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="21" Count="1" />
+      <LineId Id="24" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

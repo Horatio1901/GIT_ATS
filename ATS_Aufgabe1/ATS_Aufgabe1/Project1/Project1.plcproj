@@ -21,7 +21,16 @@
     <Compile Include="POUs\AdditionFunction.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="POUs\DoSomeMath.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\Fakultaet.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="POUs\MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="POUs\SubtractionFunction.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
