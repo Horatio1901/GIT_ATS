@@ -12,6 +12,8 @@ VAR
 	i_valueB: REAL;
 	i_myResultMinus: INT;
 	l_resultFak: LINT;
+	i_counterYellow : INT := 0;
+	i_counterBlue : INT := 0;
 END_VAR
 
     ]]></Declaration>
@@ -22,6 +24,35 @@ END_VAR
 //i_myResultMinus := SubtractionFunction(i_valueA := 200, i_valueB := 20);
 DoSomeMath(r_InputA := i_valueA := 12, r_InputB := 3.4);
 l_resultFak := Fakultaet(i_fakultat := 10);
+
+IF(GVL.globButtonYellow)
+	THEN
+	GVL.globLightGreen := TRUE;
+	i_counterYellow := i_counterYellow +1;
+	CASE i_counterYellow OF
+		200 : ;
+		400 : ;
+		600 : ;
+		800 :
+		1000:
+		1200:
+		1400:
+		1600:
+		1800:
+		2000:
+END_CASE;
+ELSE
+	GVL.globLightGreen := FALSE;
+END_IF
+
+IF(GVL.globButtonBlue)
+	THEN
+	GVL.globLightRed := TRUE;
+	i_counterBlue := i_counterBlue + 1;
+ELSE
+	GVL.globLightRed := FALSE;
+END_IF
+
 ]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
@@ -29,7 +60,23 @@ l_resultFak := Fakultaet(i_fakultat := 10);
       <LineId Id="2" Count="0" />
       <LineId Id="14" Count="0" />
       <LineId Id="21" Count="1" />
+      <LineId Id="25" Count="0" />
       <LineId Id="24" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="45" Count="2" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="53" Count="6" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="29" Count="1" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="32" Count="3" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="31" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="42" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>
