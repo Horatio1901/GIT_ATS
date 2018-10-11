@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MultiplicationFunction" Id="{1465d7da-c6a2-49b6-b9f6-cb9bf527f1ef}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION MultiplicationFunction : REAL
+VAR_INPUT
+	i_rValueA : REAL;
+	i_rValueB : REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[MultiplicationFunction := i_rValueA * i_rValueB;]]></ST>
+    </Implementation>
+    <LineIds Name="MultiplicationFunction">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

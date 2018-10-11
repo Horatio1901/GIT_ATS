@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{f5042516-f373-412b-81bb-6e93d520a896}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	i_Result : REAL;
+	i_OperandA : REAL;
+	i_OperandB : REAL;
+END_VAR
+
+    ]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[i_Result := DivisionFunction(i_rValueA := 15.3 , i_rValueB :=5.1);]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

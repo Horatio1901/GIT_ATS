@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{bd44c13e-0269-4594-9737-df5f93033b95}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	i_Result : RS232_Return;
+END_VAR
+
+    ]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[i_Result := RS232(w_RS232Input:= 16#C705);]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
