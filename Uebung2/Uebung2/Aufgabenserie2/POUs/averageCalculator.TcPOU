@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="averageCalculator" Id="{91a596e7-8749-42d3-a832-d76b81372dc2}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION averageCalculator : REAL
+VAR_INPUT
+	r_ValueInput : ARRAY[1..100] OF REAL;
+END_VAR
+VAR
+	i_Index : INT;
+	r_MeanValue : REAL := 0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[FOR i_Index := 1 TO 100 BY 1 DO
+	r_MeanValue := r_MeanValue + r_ValueInput[i_Index];
+END_FOR
+
+averageCalculator := r_MeanValue/100;]]></ST>
+    </Implementation>
+    <LineIds Name="averageCalculator">
+      <LineId Id="15" Count="0" />
+      <LineId Id="21" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="25" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
