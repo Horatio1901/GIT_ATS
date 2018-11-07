@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="DivisionFunction" Id="{900c89e1-6993-478e-b002-c5f5cf93cd4b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION DivisionFunction : REAL
+VAR_INPUT
+	i_rValueA : REAL;
+	i_rValueB : REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF	i_rValueB <> 0 THEN
+DivisionFunction := i_rValueA / i_rValueB;
+ELSE
+	DivisionFunction := 0;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="DivisionFunction">
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="12" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

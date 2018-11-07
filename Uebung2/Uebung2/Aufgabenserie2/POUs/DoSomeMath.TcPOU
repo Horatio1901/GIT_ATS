@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="DoSomeMath" Id="{09824f07-72e5-4c56-b34e-7785a772a76b}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM DoSomeMath
+VAR_INPUT
+	i_rInputA: REAL;
+	i_rInputB: REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="DoSomeMath">
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

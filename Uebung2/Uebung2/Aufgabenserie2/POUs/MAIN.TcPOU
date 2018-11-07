@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{f5042516-f373-412b-81bb-6e93d520a896}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	i_Result : REAL;
+	i_OperandA : REAL;
+	i_OperandB : REAL;
+	r_FunctionSin : REAL;
+	r_FunctionRec : REAL;
+	u_Zykluszeit : UDINT := 0;
+	r_MeanValSin : REAL;
+	r_MeanValRec : REAL;
+	r_AmplitudeSin : REAL := 1.3;
+	r_OffsetSin : REAL := 0.4;
+	r_MaxValueRec : REAL:= 2;
+	r_MinValueRec : REAL := -2.1;
+	r_KreisfrequenzSin : REAL := 10;
+	r_KreisfrequenzRec : REAL := 23;
+	r_ValuesSin : ARRAY[1..100] OF REAL;
+    r_ValuesRec : ARRAY[1..100] OF REAL;
+	r_FogettingFactor : REAL := 0.5;
+	r_MeanValSinWithForget : REAL;	
+	r_MeanValRecWithForget : REAL;
+	func_forgetSin : Forgetting_Factor;
+	func_forgetRec : Forgetting_Factor;
+	
+	sText : STRING := 'coucou';
+	bButton : BOOL;
+	rSlider : REAL;
+END_VAR
+
+    ]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[i_Result := DivisionFunction(i_rValueA := 15.3 , i_rValueB :=5.1);
+u_Zykluszeit := u_Zykluszeit +10;
+r_FunctionSin := SinusFunction(r_Amplitude :=r_AmplitudeSin,r_Offset := r_OffsetSin, r_Kreisfrequenz := r_KreisfrequenzSin, r_Time := UDINT_TO_REAL(u_Zykluszeit)/1000);
+r_FunctionRec := SquareSignal(r_MinValue := r_MinValueRec, r_MaxValue := r_MaxValueRec, r_Offset := 1,r_Kreisfrequenz:=r_KreisfrequenzRec, r_Time:= UDINT_TO_REAL(u_Zykluszeit)/1000);
+GVL.i_voltageUltrasonicSensor := 32767-	GVL.i_UltrasonicSensor;
+r_ValuesSin[100] := r_FunctionSin;
+r_ValuesRec[100] := r_FunctionRec;
+r_ValuesSin := shiftleft(r_ArrayInput := r_ValuesSin);
+r_ValuesRec := shiftleft(r_ArrayInput := r_ValuesRec);
+r_MeanValSin := averageCalculator(r_ValueInput := r_ValuesSin);
+r_MeanValRec := averageCalculator(r_ValueInput := r_ValuesRec);
+
+func_forgetSin();
+func_forgetSin.r_forgetFactor := r_FogettingFactor;
+func_forgetSin.r_inputValue := r_FunctionSin;
+r_MeanValSinWithForget := func_forgetSin.r_meanValueForget_k;
+
+func_forgetRec();
+func_forgetRec.r_forgetFactor := r_FogettingFactor;
+func_forgetRec.r_inputValue := r_FunctionRec;
+r_MeanValRecWithForget := func_forgetRec.r_meanValueForget_k;
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="15" Count="1" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="74" Count="1" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="78" Count="2" />
+      <LineId Id="66" Count="0" />
+      <LineId Id="64" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

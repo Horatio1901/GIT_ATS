@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="RS232" Id="{dd6c9e04-25c7-4d67-bcb5-86a1309dc3c7}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION RS232 : RS232_Return
+VAR_INPUT
+	w_RS232Input : WORD;
+END_VAR
+VAR
+	s_RS232Temp : RS232_Return;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[s_RS232Temp.inLenght := WORD_TO_INT(SHR(w_RS232Input, 8));
+s_RS232Temp.overrunError := WORD_TO_BOOL(SHL(1,6) AND w_RS232Input);
+s_RS232Temp.framingError := WORD_TO_BOOL(SHL(1,5) AND w_RS232Input);
+s_RS232Temp.parityError := WORD_TO_BOOL(SHL(1,4) AND w_RS232Input);
+s_RS232Temp.bufferFull := WORD_TO_BOOL(SHL(1,3) AND w_RS232Input);
+s_RS232Temp.initAccepted := WORD_TO_BOOL(SHL(1,2) AND w_RS232Input);
+s_RS232Temp.receiveRequest := WORD_TO_BOOL(SHL(1,1) AND w_RS232Input);
+s_RS232Temp.transmitAccepted := WORD_TO_BOOL(SHL(1,0) AND w_RS232Input);
+RS232 := s_RS232Temp;]]></ST>
+    </Implementation>
+    <LineIds Name="RS232">
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="5" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
