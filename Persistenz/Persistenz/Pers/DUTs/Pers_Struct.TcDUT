@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="Pers_Struct" Id="{f87af437-ed9e-48fb-885a-9f302b45f3c8}">
+    <Declaration><![CDATA[TYPE Pers_Struct :
+STRUCT
+	int1 : INT;
+	bool1 : BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

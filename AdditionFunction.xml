@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.10.30" creationDateTime="2018-11-08T18:14:53.7227744" />
+  <contentHeader name="Aufgabenserie2" modificationDateTime="2018-11-08T18:14:53.7297742">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="AdditionFunction" pouType="function">
+        <interface>
+          <returnType>
+            <REAL />
+          </returnType>
+          <inputVars>
+            <variable name="i_rValueA">
+              <type>
+                <REAL />
+              </type>
+            </variable>
+            <variable name="i_rValueB">
+              <type>
+                <REAL />
+              </type>
+            </variable>
+          </inputVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">AdditionFunction := i_rValueA + i_rValueB;</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION AdditionFunction : REAL
+VAR_INPUT
+	i_rValueA : REAL;
+	i_rValueB : REAL;
+END_VAR
+VAR
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>5777d249-9682-4539-ac0b-1f1699f5cd39</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="AdditionFunction" ObjectId="5777d249-9682-4539-ac0b-1f1699f5cd39" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

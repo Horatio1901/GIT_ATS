@@ -66,7 +66,7 @@
 					</TaskPouOids>
 				</Instance>
 			</Project>
-			<Project GUID="{52F6A4AF-3D6D-492B-B7A1-25A0A401CA02}" Name="Aufgabe_6" PrjFilePath="Aufgabe_6\Aufgabe_6.plcproj" TmcFilePath="Aufgabe_6\Aufgabe_6.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e">
+			<Project Disabled="true" GUID="{52F6A4AF-3D6D-492B-B7A1-25A0A401CA02}" Name="Aufgabe_6" PrjFilePath="Aufgabe_6\Aufgabe_6.plcproj" TmcFilePath="Aufgabe_6\Aufgabe_6.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e">
 				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Aufgabe_6\Aufgabe_6.tmc">
 					<Name>Aufgabe_6 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>

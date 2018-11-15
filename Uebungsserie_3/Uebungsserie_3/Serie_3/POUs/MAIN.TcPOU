@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{575199f3-3758-40d7-b7a6-a55d5906ab45}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	s_EdgeDetectorYellow : STRING;
+	i_Edgdetector : EdgeDetector;
+END_VAR
+
+    ]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+i_Edgdetector();
+i_Edgdetector.b_StateButtonActal := GVL.b_buttonYellow;
+s_EdgeDetectorYellow := i_Edgdetector.s_StateEdgedetector;]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="18" Count="0" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

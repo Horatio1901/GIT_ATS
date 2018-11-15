@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="EdgeDetector" Id="{b4aa9d4b-350f-4690-8998-8c8fe231252d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EdgeDetector
+VAR_INPUT
+	b_StateButtonActal : BOOL;
+END_VAR
+VAR_OUTPUT
+	s_StateEdgedetector: STRING;
+END_VAR
+VAR
+	b_StateButtonOld : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF NOT b_StateButtonOld AND b_StateButtonActal THEN
+	s_StateEdgedetector := 'risingEdge';
+	
+ELSIF  b_StateButtonOld AND NOT b_StateButtonActal THEN
+	s_StateEdgedetector := 'falingEdge';
+ELSE 
+	s_StateEdgedetector := 'not Changed';
+END_IF
+b_StateButtonOld := b_StateButtonActal;]]></ST>
+    </Implementation>
+    <LineIds Name="EdgeDetector">
+      <LineId Id="9" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="17" Count="1" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="24" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
