@@ -5,7 +5,11 @@
   <IsWizardTemplate>false</IsWizardTemplate>
   <LayoutString>&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;Layout&gt;
+<<<<<<< HEAD
   &lt;Window Guid="97332cdc-477f-498a-a8da-59f3e238ae5a" LastFocused="131861666266163269" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e3627557-a720-4c2a-9af0-d310b5d3d828" DocumentIndexInWindowGroup="0" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+=======
+  &lt;Window Guid="97332cdc-477f-498a-a8da-59f3e238ae5a" LastFocused="131861751109716213" DockedSize="200" PopupSize="0" FloatingLocation="-1, -1" FloatingSize="550, 400" LastOpenDockSituation="Document" LastFixedDockSituation="Document" LastFixedDockLocation="Right" LastFloatingWindowGuid="00000000-0000-0000-0000-000000000000" LastDockContainerCount="0" LastDockContainerIndex="0" DockedWorkingSize="250, 400" DockedWindowGroupGuid="00000000-0000-0000-0000-000000000000" DockedIndexInWindowGroup="0" DockedSplitPath="0" DocumentWorkingSize="250, 400" DocumentWindowGroupGuid="e3627557-a720-4c2a-9af0-d310b5d3d828" DocumentIndexInWindowGroup="0" DocumentSplitPath="0" FloatingWorkingSize="250, 400" FloatingWindowGroupGuid="00000000-0000-0000-0000-000000000000" FloatingIndexInWindowGroup="0" FloatingSplitPath="0" /&gt;
+>>>>>>> master
   &lt;DocumentContainer Dock="5"&gt;
     &lt;SplitLayoutSystem WorkingSize="250, 400" SplitMode="0"&gt;
       &lt;ControlLayoutSystem WorkingSize="250, 400" Guid="e3627557-a720-4c2a-9af0-d310b5d3d828" Collapsed="0" SelectedControl="97332cdc-477f-498a-a8da-59f3e238ae5a"&gt;
@@ -108,21 +112,25 @@
           </Style>
           <Channels>
             <ScopeChannelSerializable>
-              <Name>r_FunctionSin</Name>
+              <Name>r_FunctionRec</Name>
               <IdentHandle>1</IdentHandle>
               <Acquisition>
                 <DataType>REAL32</DataType>
                 <IndexGroup>16448</IndexGroup>
+<<<<<<< HEAD
                 <IndexOffset>512920</IndexOffset>
+=======
+                <IndexOffset>512924</IndexOffset>
+>>>>>>> master
                 <Unit />
                 <TargetPort>851</TargetPort>
                 <VariableSize>4</VariableSize>
-                <SymbolName>MAIN.r_FunctionSin</SymbolName>
+                <SymbolName>MAIN.r_FunctionRec</SymbolName>
                 <SymbolComment></SymbolComment>
                 <IsSymbolBased>true</IsSymbolBased>
                 <FileHandle>0</FileHandle>
                 <UseLocalServer>true</UseLocalServer>
-                <AmsNetIdString>10.155.122.125.1.1</AmsNetIdString>
+                <AmsNetIdString>10.155.113.209.1.1</AmsNetIdString>
                 <SampleTime>100000</SampleTime>
                 <Disabled>false</Disabled>
                 <Oversample>0</Oversample>
@@ -185,7 +193,7 @@
                 </OpcUaSymbol>
               </Acquisition>
               <Style>
-                <ColorValue>-16711936</ColorValue>
+                <ColorValue>-8355840</ColorValue>
                 <SolidLine>true</SolidLine>
                 <Marks>false</Marks>
                 <LineWidth>1</LineWidth>
@@ -193,8 +201,8 @@
                 <Offset>0</Offset>
                 <BitMask>18446744073709551615</BitMask>
                 <ShowCursorValue>true</ShowCursorValue>
-                <Visible>false</Visible>
-                <MarkColorValue>-16711936</MarkColorValue>
+                <Visible>true</Visible>
+                <MarkColorValue>-8355840</MarkColorValue>
                 <MarkSize>3</MarkSize>
                 <TimeShift>0</TimeShift>
                 <ScaleFactor>1</ScaleFactor>
@@ -204,7 +212,7 @@
                 <XScaleFactor>1</XScaleFactor>
                 <XBitMask>18446744073709551615</XBitMask>
                 <FillMode>0</FillMode>
-                <FillColorValue>838926080</FillColorValue>
+                <FillColorValue>847282176</FillColorValue>
                 <EndCap>false</EndCap>
                 <StartCap>false</StartCap>
                 <CapSize>3</CapSize>
@@ -290,21 +298,25 @@
               <SortPriority>-1</SortPriority>
             </ScopeChannelSerializable>
             <ScopeChannelSerializable>
-              <Name>r_FunctionRec</Name>
+              <Name>r_FunctionSin</Name>
               <IdentHandle>2</IdentHandle>
               <Acquisition>
                 <DataType>REAL32</DataType>
                 <IndexGroup>16448</IndexGroup>
+<<<<<<< HEAD
                 <IndexOffset>512924</IndexOffset>
+=======
+                <IndexOffset>512920</IndexOffset>
+>>>>>>> master
                 <Unit />
                 <TargetPort>851</TargetPort>
                 <VariableSize>4</VariableSize>
-                <SymbolName>MAIN.r_FunctionRec</SymbolName>
+                <SymbolName>MAIN.r_FunctionSin</SymbolName>
                 <SymbolComment></SymbolComment>
                 <IsSymbolBased>true</IsSymbolBased>
                 <FileHandle>0</FileHandle>
                 <UseLocalServer>true</UseLocalServer>
-                <AmsNetIdString>10.155.122.125.1.1</AmsNetIdString>
+                <AmsNetIdString>10.155.113.209.1.1</AmsNetIdString>
                 <SampleTime>100000</SampleTime>
                 <Disabled>false</Disabled>
                 <Oversample>0</Oversample>
@@ -367,7 +379,7 @@
                 </OpcUaSymbol>
               </Acquisition>
               <Style>
-                <ColorValue>-14774017</ColorValue>
+                <ColorValue>-16711681</ColorValue>
                 <SolidLine>true</SolidLine>
                 <Marks>false</Marks>
                 <LineWidth>1</LineWidth>
@@ -375,8 +387,13 @@
                 <Offset>0</Offset>
                 <BitMask>18446744073709551615</BitMask>
                 <ShowCursorValue>true</ShowCursorValue>
+<<<<<<< HEAD
                 <Visible>false</Visible>
                 <MarkColorValue>-14774017</MarkColorValue>
+=======
+                <Visible>true</Visible>
+                <MarkColorValue>-16711681</MarkColorValue>
+>>>>>>> master
                 <MarkSize>3</MarkSize>
                 <TimeShift>0</TimeShift>
                 <ScaleFactor>1</ScaleFactor>
@@ -386,7 +403,7 @@
                 <XScaleFactor>1</XScaleFactor>
                 <XBitMask>18446744073709551615</XBitMask>
                 <FillMode>0</FillMode>
-                <FillColorValue>840863999</FillColorValue>
+                <FillColorValue>838926335</FillColorValue>
                 <EndCap>false</EndCap>
                 <StartCap>false</StartCap>
                 <CapSize>3</CapSize>
@@ -486,7 +503,7 @@
                 <IsSymbolBased>true</IsSymbolBased>
                 <FileHandle>0</FileHandle>
                 <UseLocalServer>true</UseLocalServer>
-                <AmsNetIdString>10.155.122.125.1.1</AmsNetIdString>
+                <AmsNetIdString>10.155.113.209.1.1</AmsNetIdString>
                 <SampleTime>100000</SampleTime>
                 <Disabled>false</Disabled>
                 <Oversample>0</Oversample>
@@ -549,7 +566,7 @@
                 </OpcUaSymbol>
               </Acquisition>
               <Style>
-                <ColorValue>-65281</ColorValue>
+                <ColorValue>-5952982</ColorValue>
                 <SolidLine>true</SolidLine>
                 <Marks>false</Marks>
                 <LineWidth>1</LineWidth>
@@ -557,8 +574,8 @@
                 <Offset>0</Offset>
                 <BitMask>18446744073709551615</BitMask>
                 <ShowCursorValue>true</ShowCursorValue>
-                <Visible>false</Visible>
-                <MarkColorValue>-65281</MarkColorValue>
+                <Visible>true</Visible>
+                <MarkColorValue>-5952982</MarkColorValue>
                 <MarkSize>3</MarkSize>
                 <TimeShift>0</TimeShift>
                 <ScaleFactor>1</ScaleFactor>
@@ -568,7 +585,7 @@
                 <XScaleFactor>1</XScaleFactor>
                 <XBitMask>18446744073709551615</XBitMask>
                 <FillMode>0</FillMode>
-                <FillColorValue>855572735</FillColorValue>
+                <FillColorValue>849685034</FillColorValue>
                 <EndCap>false</EndCap>
                 <StartCap>false</StartCap>
                 <CapSize>3</CapSize>
@@ -654,21 +671,25 @@
               <SortPriority>-1</SortPriority>
             </ScopeChannelSerializable>
             <ScopeChannelSerializable>
-              <Name>r_MeanValRec</Name>
+              <Name>r_MeanValRecWithForget</Name>
               <IdentHandle>4</IdentHandle>
               <Acquisition>
                 <DataType>REAL32</DataType>
                 <IndexGroup>16448</IndexGroup>
+<<<<<<< HEAD
                 <IndexOffset>512936</IndexOffset>
+=======
+                <IndexOffset>513772</IndexOffset>
+>>>>>>> master
                 <Unit />
                 <TargetPort>851</TargetPort>
                 <VariableSize>4</VariableSize>
-                <SymbolName>MAIN.r_MeanValRec</SymbolName>
+                <SymbolName>MAIN.r_MeanValRecWithForget</SymbolName>
                 <SymbolComment></SymbolComment>
                 <IsSymbolBased>true</IsSymbolBased>
                 <FileHandle>0</FileHandle>
                 <UseLocalServer>true</UseLocalServer>
-                <AmsNetIdString>10.155.122.125.1.1</AmsNetIdString>
+                <AmsNetIdString>10.155.113.209.1.1</AmsNetIdString>
                 <SampleTime>100000</SampleTime>
                 <Disabled>false</Disabled>
                 <Oversample>0</Oversample>
@@ -731,7 +752,7 @@
                 </OpcUaSymbol>
               </Acquisition>
               <Style>
-                <ColorValue>-8355840</ColorValue>
+                <ColorValue>-9728477</ColorValue>
                 <SolidLine>true</SolidLine>
                 <Marks>false</Marks>
                 <LineWidth>1</LineWidth>
@@ -739,8 +760,13 @@
                 <Offset>0</Offset>
                 <BitMask>18446744073709551615</BitMask>
                 <ShowCursorValue>true</ShowCursorValue>
+<<<<<<< HEAD
                 <Visible>false</Visible>
                 <MarkColorValue>-8355840</MarkColorValue>
+=======
+                <Visible>true</Visible>
+                <MarkColorValue>-9728477</MarkColorValue>
+>>>>>>> master
                 <MarkSize>3</MarkSize>
                 <TimeShift>0</TimeShift>
                 <ScaleFactor>1</ScaleFactor>
@@ -750,7 +776,7 @@
                 <XScaleFactor>1</XScaleFactor>
                 <XBitMask>18446744073709551615</XBitMask>
                 <FillMode>0</FillMode>
-                <FillColorValue>847282176</FillColorValue>
+                <FillColorValue>845909539</FillColorValue>
                 <EndCap>false</EndCap>
                 <StartCap>false</StartCap>
                 <CapSize>3</CapSize>
@@ -850,7 +876,7 @@
                 <IsSymbolBased>true</IsSymbolBased>
                 <FileHandle>0</FileHandle>
                 <UseLocalServer>true</UseLocalServer>
-                <AmsNetIdString>10.155.122.125.1.1</AmsNetIdString>
+                <AmsNetIdString>10.155.113.209.1.1</AmsNetIdString>
                 <SampleTime>100000</SampleTime>
                 <Disabled>false</Disabled>
                 <Oversample>0</Oversample>
@@ -913,7 +939,7 @@
                 </OpcUaSymbol>
               </Acquisition>
               <Style>
-                <ColorValue>-16711681</ColorValue>
+                <ColorValue>-16777088</ColorValue>
                 <SolidLine>true</SolidLine>
                 <Marks>false</Marks>
                 <LineWidth>1</LineWidth>
@@ -921,8 +947,8 @@
                 <Offset>0</Offset>
                 <BitMask>18446744073709551615</BitMask>
                 <ShowCursorValue>true</ShowCursorValue>
-                <Visible>false</Visible>
-                <MarkColorValue>-16711681</MarkColorValue>
+                <Visible>true</Visible>
+                <MarkColorValue>-16777088</MarkColorValue>
                 <MarkSize>3</MarkSize>
                 <TimeShift>0</TimeShift>
                 <ScaleFactor>1</ScaleFactor>
@@ -932,7 +958,7 @@
                 <XScaleFactor>1</XScaleFactor>
                 <XBitMask>18446744073709551615</XBitMask>
                 <FillMode>0</FillMode>
-                <FillColorValue>838926335</FillColorValue>
+                <FillColorValue>838860928</FillColorValue>
                 <EndCap>false</EndCap>
                 <StartCap>false</StartCap>
                 <CapSize>3</CapSize>
@@ -1018,7 +1044,7 @@
               <SortPriority>-1</SortPriority>
             </ScopeChannelSerializable>
             <ScopeChannelSerializable>
-              <Name>r_MeanValRecWithForget</Name>
+              <Name>r_MeanValRecWithForget(1)</Name>
               <IdentHandle>6</IdentHandle>
               <Acquisition>
                 <DataType>REAL32</DataType>
@@ -1032,7 +1058,7 @@
                 <IsSymbolBased>true</IsSymbolBased>
                 <FileHandle>0</FileHandle>
                 <UseLocalServer>true</UseLocalServer>
-                <AmsNetIdString>10.155.122.125.1.1</AmsNetIdString>
+                <AmsNetIdString>10.155.113.209.1.1</AmsNetIdString>
                 <SampleTime>100000</SampleTime>
                 <Disabled>false</Disabled>
                 <Oversample>0</Oversample>
@@ -1095,7 +1121,7 @@
                 </OpcUaSymbol>
               </Acquisition>
               <Style>
-                <ColorValue>-5952982</ColorValue>
+                <ColorValue>-16181</ColorValue>
                 <SolidLine>true</SolidLine>
                 <Marks>false</Marks>
                 <LineWidth>1</LineWidth>
@@ -1103,8 +1129,13 @@
                 <Offset>0</Offset>
                 <BitMask>18446744073709551615</BitMask>
                 <ShowCursorValue>true</ShowCursorValue>
+<<<<<<< HEAD
                 <Visible>false</Visible>
                 <MarkColorValue>-5952982</MarkColorValue>
+=======
+                <Visible>true</Visible>
+                <MarkColorValue>-16181</MarkColorValue>
+>>>>>>> master
                 <MarkSize>3</MarkSize>
                 <TimeShift>0</TimeShift>
                 <ScaleFactor>1</ScaleFactor>
@@ -1114,7 +1145,7 @@
                 <XScaleFactor>1</XScaleFactor>
                 <XBitMask>18446744073709551615</XBitMask>
                 <FillMode>0</FillMode>
-                <FillColorValue>849685034</FillColorValue>
+                <FillColorValue>855621835</FillColorValue>
                 <EndCap>false</EndCap>
                 <StartCap>false</StartCap>
                 <CapSize>3</CapSize>

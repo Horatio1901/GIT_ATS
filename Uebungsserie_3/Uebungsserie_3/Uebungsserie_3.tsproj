@@ -37,13 +37,28 @@
 		</System>
 		<Plc>
 			<Project GUID="{C5004FDD-1427-4DC1-A000-E33346031C8D}" Name="Serie_3" PrjFilePath="Serie_3\Serie_3.plcproj" TmcFilePath="Serie_3\Serie_3.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Serie_3\Serie_3.tmc">
 					<Name>Serie_3 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
 							<Name>GVL.b_buttonYellow</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.b_buttonBlue</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.b_LampeCorrect</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.b_LampeWrong</Name>
 							<Type>BOOL</Type>
 						</Var>
 					</Vars>
@@ -100,7 +115,7 @@
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="Input" Index="#x6010" Sub="#x01">
+								<Entry Name="BlueButton" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -123,12 +138,12 @@
 							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7000" Sub="#x01">
+								<Entry Name="RedLight" Index="#x7000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="Output" Index="#x7010" Sub="#x01">
+								<Entry Name="GreenLight" Index="#x7010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -459,9 +474,15 @@ Bit1: Value bigger/equal Limit2]]>
 		</Io>
 	</Project>
 	<Mappings>
+		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^Serie_3^Serie_3 Instance">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1004)">
+				<Link VarA="PlcTask Inputs^GVL.b_buttonBlue" VarB="Channel 2^BlueButton"/>
 				<Link VarA="PlcTask Inputs^GVL.b_buttonYellow" VarB="Channel 1^YellowButton"/>
+			</OwnerB>
+			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 3 (EL2004)">
+				<Link VarA="PlcTask Outputs^GVL.b_LampeCorrect" VarB="Channel 2^GreenLight"/>
+				<Link VarA="PlcTask Outputs^GVL.b_LampeWrong" VarB="Channel 1^RedLight"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>
