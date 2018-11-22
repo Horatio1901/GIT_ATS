@@ -3,6 +3,11 @@
   <POU Name="MAIN" Id="{085c1498-bfec-42b5-9b30-2ef2e53ea97d}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+ // Edge Detector
+	inputValue: BOOL := FALSE;
+myEDG_var  : EdgeDetector;
+riesingEdge :BOOL;
+fallingEdge :BOOL;
 	
 currentSafeState  : SafeState := 0;
 	
@@ -26,7 +31,14 @@ END_VAR
 
 4:
 
-END_CASE]]></ST>
+END_CASE
+
+//Implement Edge Detector
+myEDG_var();
+myEDG_var.inputValue := inputValue;
+// Outputs from Edge Detection
+riesingEdge :=myEDG_var.riesingEdge;
+fallingEdge :=myEDG_var.fallingEdge;]]></ST>
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="2" Count="0" />
@@ -46,6 +58,10 @@ END_CASE]]></ST>
       <LineId Id="17" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="10" Count="0" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="48" Count="3" />
     </LineIds>
   </POU>
 </TcPlcObject>
