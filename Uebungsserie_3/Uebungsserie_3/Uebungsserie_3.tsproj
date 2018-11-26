@@ -2,7 +2,7 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4022.22">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000001}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..0] OF BIT</Name>
 			<BitSize>1</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -11,7 +11,7 @@
 			</ArrayInfo>
 		</DataType>
 		<DataType>
-			<Name GUID="{18071995-0000-0000-0000-002000000006}" IecBaseType="true" BitType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..5] OF BIT</Name>
+			<Name GUID="{18071995-0000-0000-0000-002000000006}" IecBaseType="true" AutoDeleteType="true" HideSubItems="true">ARRAY [0..5] OF BIT</Name>
 			<BitSize>6</BitSize>
 			<BaseType GUID="{18071995-0000-0000-0000-000000000010}">BIT</BaseType>
 			<ArrayInfo>
@@ -110,12 +110,12 @@
 							<SyncMan>001001000000010004000000000000000100001000010000</SyncMan>
 							<Fmmu>0000000000000000001000010100000002000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1a00" Flags="#x0011" SyncMan="0">
-								<Entry Name="YellowButton" Index="#x6000" Sub="#x01">
+								<Entry Name="Input" Index="#x6000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1a01" Flags="#x0011" SyncMan="0">
-								<Entry Name="BlueButton" Index="#x6010" Sub="#x01">
+								<Entry Name="Input" Index="#x6010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -138,12 +138,12 @@
 							<SyncMan>000f01004400010003000000000000000000000f44090000</SyncMan>
 							<Fmmu>0000000000000000000f00020100000001000000000000000000000000000000</Fmmu>
 							<Pdo Name="Channel 1" Index="#x1600" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="RedLight" Index="#x7000" Sub="#x01">
+								<Entry Name="Output" Index="#x7000" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="Channel 2" Index="#x1601" InOut="1" Flags="#x0011" SyncMan="0">
-								<Entry Name="GreenLight" Index="#x7010" Sub="#x01">
+								<Entry Name="Output" Index="#x7010" Sub="#x01">
 									<Type>BIT</Type>
 								</Entry>
 							</Pdo>
@@ -477,12 +477,12 @@ Bit1: Value bigger/equal Limit2]]>
 		<MappingInfo Identifier="{00000000-2001-0850-0020-500810000403}" Id="#x02030010"/>
 		<OwnerA Name="TIPC^Serie_3^Serie_3 Instance">
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 2 (EL1004)">
-				<Link VarA="PlcTask Inputs^GVL.b_buttonBlue" VarB="Channel 2^BlueButton"/>
-				<Link VarA="PlcTask Inputs^GVL.b_buttonYellow" VarB="Channel 1^YellowButton"/>
+				<Link VarA="PlcTask Inputs^GVL.b_buttonBlue" VarB="Channel 2^Input"/>
+				<Link VarA="PlcTask Inputs^GVL.b_buttonYellow" VarB="Channel 1^Input"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 1 (EK1200)^Term 3 (EL2004)">
-				<Link VarA="PlcTask Outputs^GVL.b_LampeCorrect" VarB="Channel 2^GreenLight"/>
-				<Link VarA="PlcTask Outputs^GVL.b_LampeWrong" VarB="Channel 1^RedLight"/>
+				<Link VarA="PlcTask Outputs^GVL.b_LampeCorrect" VarB="Channel 2^Output"/>
+				<Link VarA="PlcTask Outputs^GVL.b_LampeWrong" VarB="Channel 1^Output"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>
