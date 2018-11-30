@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.10.30" creationDateTime="2018-11-22T20:16:21.5812716" />
+  <contentHeader name="Aufgabenserie_3" modificationDateTime="2018-11-22T20:16:21.5882738">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes>
+      <dataType name="FSM_Deb">
+        <baseType>
+          <enum>
+            <values>
+              <value name="deb_state_init" value="0" />
+              <value name="deb_state_low" />
+              <value name="deb_state_rising" />
+              <value name="deb_state_high" />
+              <value name="deb_state_doble_activ" />
+              <value name="deb_state_falling" />
+            </values>
+          </enum>
+        </baseType>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/attributes" handleUnknown="implementation">
+            <Attributes>
+              <Attribute Name="qualified_only" Value="" />
+              <Attribute Name="strict" Value="" />
+            </Attributes>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE FSM_Deb :
+(
+	deb_state_init := 0,
+	deb_state_low,
+	deb_state_rising,
+	deb_state_high,
+	deb_state_doble_activ,
+	deb_state_falling
+);
+END_TYPE
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>80c65158-0571-46d1-8821-db98740ef809</ObjectId>
+          </data>
+        </addData>
+      </dataType>
+    </dataTypes>
+    <pous />
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="FSM_Deb" ObjectId="80c65158-0571-46d1-8821-db98740ef809" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

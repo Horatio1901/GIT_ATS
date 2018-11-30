@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="fb_edgeDetector" Id="{f4d1fece-13b1-4475-9113-acb0fa56be85}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK fb_edgeDetector
+VAR_INPUT
+	b_inputVal			:	BOOL;
+	i_doobleActivTime	: 	INT			:=50;
+END_VAR
+VAR_OUTPUT
+	b_risingEdge		:	BOOL;
+	b_doubleActivate	:	BOOL;
+	b_fallingEdge		:	BOOL;
+END_VAR
+VAR
+	b_state				:	BOOL;
+	i_timCnt			:	INT;
+	i_debCnt			:	INT		:=0;
+	
+	st_current_state		:	FSM_Deb	:= FSM_Deb.deb_state_init;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[b_risingEdge		:= 	FALSE;
+b_fallingEdge		:=	FALSE;
+b_doubleActivate	:=	FALSE;
+CASE st_current_state OF
+	FSM_Deb.deb_state_init:
+		IF b_inputVal THEN
+			st_current_state	:=	FSM_Deb.deb_state_high;
+		ELSE
+			st_current_state	:=	FSM_Deb.deb_state_low;
+		END_IF
+	
+	FSM_Deb.deb_state_low:
+		IF b_inputVal THEN
+			st_current_state	:=	FSM_Deb.deb_state_rising;
+		END_IF
+		
+	FSM_Deb.deb_state_rising:
+		IF i_debCnt<5 THEN
+			i_debCnt	:= i_debCnt+1;
+		ELSIF i_debCnt<i_doobleActivTime THEN
+			i_debCnt	:= i_debCnt+1;
+			IF NOT b_inputVal THEN
+				st_current_state	:=	FSM_Deb.deb_state_doble_activ;
+			END_IF
+		ELSE
+			b_risingEdge			:= TRUE;
+			st_current_state		:=	FSM_Deb.deb_state_high;
+			i_debCnt				:= 0;
+		END_IF
+	
+	FSM_Deb.deb_state_doble_activ:
+		IF i_debCnt<i_doobleActivTime THEN
+			IF b_inputVal THEN
+				b_doubleActivate	:= TRUE;
+				st_current_state	:=	FSM_Deb.deb_state_high;
+				i_debCnt			:=0;
+			ELSE
+				i_debCnt		:= i_debCnt+1;
+			END_IF
+		ELSE
+			st_current_state	:=	FSM_Deb.deb_state_low;
+			i_debCnt			:=0;
+			
+		END_IF
+	
+	FSM_Deb.deb_state_high:
+		IF NOT b_inputVal THEN
+			st_current_state	:= FSM_Deb.deb_state_falling;
+		END_IF
+	
+	FSM_Deb.deb_state_falling:
+		IF i_debCnt<1 THEN
+			i_debCnt	:= i_debCnt+1;
+		ELSE
+			st_current_state	:=	FSM_deb.deb_state_low;
+			b_fallingEdge		:= TRUE;		
+			i_debCnt			:=0;
+		END_IF
+	
+		
+END_CASE
+]]></ST>
+    </Implementation>
+    <LineIds Name="fb_edgeDetector">
+      <LineId Id="3" Count="1" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="65" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="76" Count="3" />
+      <LineId Id="72" Count="1" />
+      <LineId Id="80" Count="2" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="85" Count="1" />
+      <LineId Id="88" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="89" Count="2" />
+      <LineId Id="93" Count="2" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="96" Count="2" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="106" Count="0" />
+      <LineId Id="127" Count="0" />
+      <LineId Id="107" Count="1" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="109" Count="0" />
+      <LineId Id="101" Count="0" />
+      <LineId Id="99" Count="1" />
+      <LineId Id="110" Count="8" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="122" Count="1" />
+      <LineId Id="128" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

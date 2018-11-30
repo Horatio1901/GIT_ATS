@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <GVL Name="GVL_const" Id="{3a849f78-11a9-47f0-ac19-698c5e7d87d2}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL CONSTANT
+	T_LIGHT_DURATION		:	TIME	:=	T#5S;
+	T_CLOCK_CICLE			:	TIME	:=	T#10ms;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

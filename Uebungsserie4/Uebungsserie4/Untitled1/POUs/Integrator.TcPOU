@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="Integrator" Id="{c0c5a071-b57a-4623-a5b3-0a92df965c35}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Integrator
+VAR_INPUT
+	e_k		:	REAL;
+END_VAR
+VAR_OUTPUT
+	u_k		:	REAL;
+END_VAR
+VAR
+	u_k_1	:	REAL;
+	e_k_1	:	REAL;
+	T		:	REAL	:=	0;
+	T_leave	:	REAL	:=	0;
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+IF	GVL.t_global		=	0	THEN
+	T:= GVL.t_cycle 	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="Integrator">
+      <LineId Id="16" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="17" Count="1" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
