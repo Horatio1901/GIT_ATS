@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project xmlns="http://www.plcopen.org/xml/tc6_0200">
+  <fileHeader companyName="Beckhoff Automation GmbH" productName="TwinCAT PLC Control" productVersion="3.5.10.30" creationDateTime="2018-11-15T20:00:53.5125784" />
+  <contentHeader name="Aufgabenserie_3" modificationDateTime="2018-11-15T20:00:53.5156126">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="1" y="1" />
+      </fbd>
+      <ld>
+        <scaling x="1" y="1" />
+      </ld>
+      <sfc>
+        <scaling x="1" y="1" />
+      </sfc>
+    </coordinateInfo>
+    <addData>
+      <data name="http://www.3s-software.com/plcopenxml/projectinformation" handleUnknown="implementation">
+        <ProjectInformation />
+      </data>
+    </addData>
+  </contentHeader>
+  <types>
+    <dataTypes />
+    <pous>
+      <pou name="fb_edgeDetector" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="b_inputVal">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="i_doobleActivTime">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="50" />
+              </initialValue>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="b_risingEdge">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="b_doubleActivate">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="b_fallingEdge">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="b_state">
+              <type>
+                <BOOL />
+              </type>
+            </variable>
+            <variable name="i_timCnt">
+              <type>
+                <INT />
+              </type>
+            </variable>
+            <variable name="i_debCnt">
+              <type>
+                <INT />
+              </type>
+              <initialValue>
+                <simpleValue value="0" />
+              </initialValue>
+            </variable>
+            <variable name="st_current_state">
+              <type>
+                <derived name="FSM_Deb" />
+              </type>
+              <initialValue>
+                <simpleValue value="FSM_Deb.deb_state_init" />
+              </initialValue>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml">b_risingEdge		:= 	FALSE;
+b_fallingEdge		:=	FALSE;
+b_doubleActivate	:=	FALSE;
+CASE st_current_state OF
+	FSM_Deb.deb_state_init:
+		IF b_inputVal THEN
+			st_current_state	:=	FSM_Deb.deb_state_high;
+		ELSE
+			st_current_state	:=	FSM_Deb.deb_state_low;
+		END_IF
+	
+	FSM_Deb.deb_state_low:
+		IF b_inputVal THEN
+			st_current_state	:=	FSM_Deb.deb_state_rising;
+		END_IF
+		
+	FSM_Deb.deb_state_rising:
+		IF i_debCnt&lt;5 THEN
+			i_debCnt	:= i_debCnt+1;
+		ELSIF i_debCnt&lt;i_doobleActivTime THEN
+			i_debCnt	:= i_debCnt+1;
+			IF NOT b_inputVal THEN
+				st_current_state	:=	FSM_Deb.deb_state_doble_activ;
+			END_IF
+		ELSE
+			b_risingEdge			:= TRUE;
+			st_current_state		:=	FSM_Deb.deb_state_high;
+			i_debCnt				:= 0;
+		END_IF
+	
+	FSM_Deb.deb_state_doble_activ:
+		IF i_debCnt&lt;i_doobleActivTime THEN
+			IF b_inputVal THEN
+				b_doubleActivate	:= TRUE;
+				st_current_state	:=	FSM_Deb.deb_state_high;
+				i_debCnt			:=0;
+			ELSE
+				i_debCnt		:= i_debCnt+1;
+			END_IF
+		ELSE
+			st_current_state	:=	FSM_Deb.deb_state_low;
+			i_debCnt			:=0;
+			
+		END_IF
+	
+	FSM_Deb.deb_state_high:
+		IF NOT b_inputVal THEN
+			st_current_state	:= FSM_Deb.deb_state_falling;
+		END_IF
+	
+	FSM_Deb.deb_state_falling:
+		IF i_debCnt&lt;1 THEN
+			i_debCnt	:= i_debCnt+1;
+		ELSE
+			st_current_state	:=	FSM_deb.deb_state_low;
+			b_fallingEdge		:= TRUE;		
+			i_debCnt			:=0;
+		END_IF
+	
+		
+END_CASE
+</xhtml>
+          </ST>
+        </body>
+        <addData>
+          <data name="http://www.3s-software.com/plcopenxml/interfaceasplaintext" handleUnknown="implementation">
+            <InterfaceAsPlainText>
+              <xhtml xmlns="http://www.w3.org/1999/xhtml">FUNCTION_BLOCK fb_edgeDetector
+VAR_INPUT
+	b_inputVal			:	BOOL;
+	i_doobleActivTime	: 	INT			:=50;
+END_VAR
+VAR_OUTPUT
+	b_risingEdge		:	BOOL;
+	b_doubleActivate	:	BOOL;
+	b_fallingEdge		:	BOOL;
+END_VAR
+VAR
+	b_state				:	BOOL;
+	i_timCnt			:	INT;
+	i_debCnt			:	INT		:=0;
+	
+	st_current_state		:	FSM_Deb	:= FSM_Deb.deb_state_init;
+END_VAR
+</xhtml>
+            </InterfaceAsPlainText>
+          </data>
+          <data name="http://www.3s-software.com/plcopenxml/objectid" handleUnknown="discard">
+            <ObjectId>f4d1fece-13b1-4475-9113-acb0fa56be85</ObjectId>
+          </data>
+        </addData>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations />
+  </instances>
+  <addData>
+    <data name="http://www.3s-software.com/plcopenxml/projectstructure" handleUnknown="discard">
+      <ProjectStructure>
+        <Object Name="fb_edgeDetector" ObjectId="f4d1fece-13b1-4475-9113-acb0fa56be85" />
+      </ProjectStructure>
+    </data>
+  </addData>
+</project>

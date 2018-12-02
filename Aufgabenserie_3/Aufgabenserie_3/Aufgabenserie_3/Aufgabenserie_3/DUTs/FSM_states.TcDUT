@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="FSM_states" Id="{9ab5d4f9-d23a-4464-862a-f741dda7d28f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE FSM_states :
+(
+	state_init := 0,
+	state_close,
+	state_check,
+	state_wrong,
+	state_open,
+	state_goChange,
+	state_codChange,
+	state_Res
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="FSM_Deb" Id="{80c65158-0571-46d1-8821-db98740ef809}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+{attribute 'strict'}
+TYPE FSM_Deb :
+(
+	deb_state_init := 0,
+	deb_state_low,
+	deb_state_rising,
+	deb_state_high,
+	deb_state_doble_activ,
+	deb_state_falling
+);
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

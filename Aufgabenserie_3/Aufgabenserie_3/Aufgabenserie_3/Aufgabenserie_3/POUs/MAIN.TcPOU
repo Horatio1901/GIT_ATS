@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{76f6e05a-fb6a-493b-b972-fc3e698e9984}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	st_current_state		:	FSM_states		:= FSM_states.state_init;
+	
+	fb_edgeDed_yellow		: 	fb_edgeDetector;
+	fb_edgeDed_blue			:	fb_edgeDetector;
+	
+	b_array_code			:	ARRAY[0..3] OF BOOL		:=	[FALSE,TRUE,FALSE,TRUE];
+	i_currentIndex			:	INT;
+	t_correctCounter		:	TIME := T#0MS;
+	
+	i_wait_CodeChange		:	INT;
+	
+	
+END_VAR
+
+    ]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE st_current_state OF
+	FSM_states.state_init:
+
+		st_current_state	:=	FSM_states.state_close;
+	FSM_states.state_close:
+	
+		GVL_IO.b_red_lamp	:=	FALSE;
+		GVL_IO.b_green_lamp	:=	FALSE;
+		i_currentIndex		:=	0;
+		t_correctCounter	:=	T#0MS;
+		i_wait_CodeChange	:=	0;
+		
+		st_current_state	:=	FSM_states.state_check;
+			
+	FSM_states.state_check:
+		
+		fb_edgeDed_blue(b_inputVal:=GVL_IO.b_blue_button);
+		fb_edgeDed_yellow(b_inputVal:=GVL_IO.b_yellow_button);
+		IF fb_edgeDed_blue.b_risingEdge THEN
+			IF b_array_code[i_currentIndex]=FALSE THEN
+				i_currentIndex		:=	i_currentIndex+1;
+			ELSE
+				st_current_state	:=	FSM_states.state_wrong;	
+			END_IF
+		ELSIF fb_edgeDed_yellow.b_risingEdge THEN
+			IF b_array_code[i_currentIndex]=TRUE THEN
+				i_currentIndex		:=	i_currentIndex+1;
+			ELSE
+				st_current_state	:=	FSM_states.state_wrong;	
+			END_IF
+		ELSIF fb_edgeDed_blue.b_doubleActivate THEN
+			st_current_state	:=	FSM_states.state_Res;			
+		END_IF
+		
+		IF i_currentIndex > 3 THEN
+			st_current_state		:=	FSM_states.state_open;	
+		END_IF
+	FSM_states.state_Res:
+		t_correctCounter	:=	t_correctCounter+GVL_const.T_CLOCK_CICLE;
+		IF t_correctCounter=T#50MS THEN
+			GVL_IO.b_green_lamp		:= NOT GVL_IO.b_green_lamp;
+			GVL_IO.b_red_lamp		:= NOT GVL_IO.b_red_lamp;
+		ELSIF t_correctCounter=T#100MS THEN
+			GVL_IO.b_green_lamp		:= NOT GVL_IO.b_green_lamp;
+			GVL_IO.b_red_lamp		:= NOT GVL_IO.b_red_lamp;
+		ELSIF t_correctCounter=T#150MS THEN
+			GVL_IO.b_green_lamp		:= NOT GVL_IO.b_green_lamp;
+			GVL_IO.b_red_lamp		:= NOT GVL_IO.b_red_lamp;
+		ELSIF t_correctCounter=T#200MS THEN
+			GVL_IO.b_green_lamp		:= NOT GVL_IO.b_green_lamp;
+			GVL_IO.b_red_lamp		:= NOT GVL_IO.b_red_lamp;
+		ELSIF t_correctCounter=T#250MS THEN
+			GVL_IO.b_green_lamp		:= NOT GVL_IO.b_green_lamp;
+			GVL_IO.b_red_lamp		:= NOT GVL_IO.b_red_lamp;
+		ELSIF t_correctCounter>T#300MS THEN
+			st_current_state	:= FSM_states.state_init;
+		END_IF
+	
+	FSM_states.state_wrong:
+		
+		IF t_correctCounter < GVL_const.T_LIGHT_DURATION THEN
+			GVL_IO.b_red_lamp		:=	TRUE;
+			t_correctCounter		:=	t_correctCounter + GVL_const.T_CLOCK_CICLE;
+		ELSE
+			st_current_state		:=	FSM_states.state_init;
+		END_IF
+	
+	FSM_states.state_open:
+		
+		IF t_correctCounter < GVL_const.T_LIGHT_DURATION THEN
+			GVL_IO.b_green_lamp		:=	TRUE;
+			t_correctCounter		:=	t_correctCounter + GVL_const.T_CLOCK_CICLE;
+		ELSE
+			st_current_state		:=	FSM_states.state_init;
+		END_IF
+		
+		
+		IF GVL_IO.b_blue_button AND GVL_IO.b_yellow_button THEN
+			st_current_state		:= FSM_states.state_goChange;
+			i_currentIndex			:=0;
+		END_IF
+		
+	FSM_states.state_goChange:
+	
+		fb_edgeDed_blue(b_inputVal			:=	GVL_IO.b_blue_button);
+		fb_edgeDed_yellow(b_inputVal		:=	GVL_IO.b_yellow_button);
+		
+		IF fb_edgeDed_blue.b_fallingEdge OR fb_edgeDed_yellow.b_fallingEdge THEN
+			i_wait_CodeChange				:=	i_wait_CodeChange+1;
+		END_IF
+		IF i_wait_CodeChange > 1 THEN
+			st_current_state				:=	FSM_states.state_codChange;
+		END_IF
+		
+		
+	FSM_states.state_codChange:
+		GVL_IO.b_green_lamp			:=	TRUE;
+		GVL_IO.b_red_lamp			:=	TRUE;
+		
+		fb_edgeDed_blue(b_inputVal			:=GVL_IO.b_blue_button);
+		fb_edgeDed_yellow(b_inputVal		:=GVL_IO.b_yellow_button);
+		
+		IF fb_edgeDed_blue.b_risingEdge THEN
+			b_array_code[i_currentIndex]	:=	FALSE;
+			i_currentIndex					:=	i_currentIndex+1;
+		ELSIF fb_edgeDed_yellow.b_risingEdge THEN
+			b_array_code[i_currentIndex]	:=	TRUE;
+			i_currentIndex					:=	i_currentIndex+1;
+		END_IF
+		
+		IF i_currentIndex > 3 THEN
+			st_current_state				:=	FSM_states.state_init;
+		END_IF
+	
+		
+	
+		
+	
+	
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="2" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="38" Count="2" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="43" Count="2" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="47" Count="1" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="93" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="61" Count="3" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="155" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="65" Count="2" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="187" Count="0" />
+      <LineId Id="159" Count="1" />
+      <LineId Id="162" Count="3" />
+      <LineId Id="174" Count="2" />
+      <LineId Id="178" Count="2" />
+      <LineId Id="183" Count="1" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="185" Count="1" />
+      <LineId Id="181" Count="0" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="11" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="71" Count="2" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="77" Count="3" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="84" Count="1" />
+      <LineId Id="96" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="125" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="126" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="133" Count="1" />
+      <LineId Id="129" Count="3" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="87" Count="1" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="100" Count="1" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="102" Count="2" />
+      <LineId Id="106" Count="3" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="110" Count="3" />
+      <LineId Id="94" Count="1" />
+      <LineId Id="89" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
