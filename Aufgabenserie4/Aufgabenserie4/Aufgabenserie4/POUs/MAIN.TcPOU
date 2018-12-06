@@ -1,13 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.0.36">
-  <POU Name="MAIN" Id="{1f1b163e-0968-4fe6-83df-2c8caf024eea}">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="MAIN" Id="{1f1b163e-0968-4fe6-83df-2c8caf024eea}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	r_Tao : REAL := 0.1;
+	r_Input : REAL;;
+	r_Output : REAL;
+	FB_LowPasss : LowpassFilter;
 END_VAR
-]]>
-    </Declaration>
+
+    ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[]]></ST>
+      <ST><![CDATA[FB_LowPasss();
+FB_LowPasss.r_Tao := r_Tao;
+IF
+FB_LowPasss.r_Input := r_Input;
+r_Output := FB_LowPasss.r_Output;]]></ST>
     </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="13" Count="0" />
+      <LineId Id="10" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="11" Count="0" />
+    </LineIds>
   </POU>
 </TcPlcObject>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="PWM_Function" Id="{e0a287df-dd8a-4068-aa97-cc7325cf804e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION PWM_Function : REAL
+VAR_INPUT
+	dutyCycle : REAL; // In %
+	A : REAL; // Amplitude
+	t : REAL; // Zeitpunkt
+	f : REAL; // Frequenz
+	cycleTicks : REAL;
+END_VAR
+VAR
+	refVal: REAL;
+	periodTime : REAL;
+	actTime : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[periodTime := ((1.0 / f) * 1000.0) / (cycleTicks*1.0); // in 10 ms
+refVal := periodTime * dutyCycle / 100.0;
+actTime := ((t/periodTime) - REAL_TO_INT(t/periodTime)) * periodTime; // Keine Ahnung ob das stimmt
+IF(actTime < refVal) THEN
+	PWM_Function := A;	
+ELSIF actTime >= refVal THEN
+	PWM_Function := 0.0;	
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="PWM_Function">
+      <LineId Id="3" Count="8" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

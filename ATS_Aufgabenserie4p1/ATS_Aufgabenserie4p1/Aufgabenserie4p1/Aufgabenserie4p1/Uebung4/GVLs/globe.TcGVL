@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <GVL Name="globe" Id="{a3406dc4-e693-42a9-8e66-ab6cb4e42361}">
+    <Declaration><![CDATA[
+VAR_GLOBAL
+	iglobCounter : INT;
+	yellowButton AT %I* : BOOL;
+	blueButton AT %I* : BOOL;
+	greenLight AT %Q* : BOOL;
+	redLight AT %Q* : BOOL;
+	intUltrasonicSensor AT %I* : INT;
+	iAnalogOutput AT %Q* : INT;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="GetTime" Id="{6b48b890-8388-4932-b767-5282b9a5d3f8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK GetTime
+VAR_INPUT
+	cycleTicks : REAL; // Unter SYSTEM -> TASKS eingestellte ticks
+END_VAR
+VAR_OUTPUT
+	actTime : REAL;
+END_VAR
+
+VAR
+	T : REAL;
+	firstCall : BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[T  := ((cycleTicks*1.0) / 1000.0);
+IF firstCall = FALSE THEN
+	actTime := 0.0;
+	firstCall := TRUE;
+ELSE
+	actTime := actTime + T;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="GetTime">
+      <LineId Id="3" Count="6" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

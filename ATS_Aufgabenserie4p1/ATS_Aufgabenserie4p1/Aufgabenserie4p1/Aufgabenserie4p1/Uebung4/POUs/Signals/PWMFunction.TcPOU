@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="PWMFunction" Id="{bb6bacc8-e748-4cb5-8e15-22121f2a203b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK PWMFunction
+VAR_INPUT
+	dutyCycle : REAL; // In % = t_ein / maxCount
+	A : REAL; // Amplitude
+	f : REAL; // Frequenz
+	cycleTicks : REAL;
+END_VAR
+
+VAR_OUTPUT
+	freqTooHigh : BOOL; //Verknüpfen mit roter LED
+	pwm_Signal : REAL;
+END_VAR
+
+VAR
+	T : REAL; // Zeit die das System braucht um den Funktionsblock einmal auzuführen
+	fMax : REAL; // Maximale Frequnez die mit der TaskZeit erreicht werden kann
+	counter : REAL;
+	maxCount : REAL;
+	t_ein : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Taktzeit aus cycleTicks berechnen
+T  := ((cycleTicks*1.0) / 1000.0);
+IF T > 0.0 THEN
+	fMax := 1.0 / T;
+END_IF
+IF f > fMax THEN
+	freqTooHigh := TRUE;
+	f := fMax;
+END_IF
+IF f > 0.0 THEN
+	maxCount := (1.0 / f);
+END_IF
+
+t_ein := (dutyCycle / 100.0) * maxCount;
+
+// Hauptzähler für Sägezahnrefernez
+IF counter < maxCount THEN
+	
+	// PWM Generator
+	IF t_ein >= counter THEN
+		pwm_Signal := A;
+	ELSE
+		pwm_Signal := 0.0;
+	END_IF
+	counter := counter + T;
+		
+ELSIF counter >= maxCount THEN
+	counter := 0.0;
+END_IF
+
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="PWMFunction">
+      <LineId Id="9" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="54" Count="2" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="51" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="49" Count="1" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

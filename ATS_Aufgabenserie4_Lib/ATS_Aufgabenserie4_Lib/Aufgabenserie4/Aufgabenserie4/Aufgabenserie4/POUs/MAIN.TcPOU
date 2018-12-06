@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="MAIN" Id="{2cd76e09-1928-4d81-ad59-70fd09a82ea4}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	
+	// Achtung !!! Second order lag Ausgang geht auf Infty => Error
+	getTime : GetTime;
+	pwmTest : PWMFunction;
+	DisplayTestPwm: REAL;
+	DisplayTestSquare : REAL;
+	
+	pwmFunctDut025 : PWMFunction; 
+	pwmFunctDut05 : PWMFunction;
+	pwmFunctDut075 : PWMFunction;
+	pwm_025 : REAL;
+	pwm_05 : REAL;
+	pwm_075 : REAL;  
+	actTime : REAL := 0.0;
+	integrate025 : Integrator;
+	integrate05 : Integrator;
+	integrate075 : Integrator;
+	dispIntegrate025 : REAL;
+	dispIntegrate05 : REAL;
+	dispIntegrate075 : REAL;
+	lowPassWe : LowpassFilter;
+	lowPassWeDiv10 : LowpassFilter;
+	lowPass10We : LowpassFilter;
+	sinWe : REAL;
+	sinWeDiv10 : REAL;
+	sin10We : REAL;
+	dispLowPassWe : REAL;
+	dispLowPassWeDiv10 : REAL;
+	dispLowPass10We : REAL;
+	sq_dispLowPassWe : REAL;
+	sq_dispLowPassWeDiv10 : REAL;
+	sq_dispLowPass10We : REAL;
+	sqWe : REAL;
+	sqWeDiv10 : REAL;
+	sq10We : REAL;
+	sq_lowPassWe : LowpassFilter;
+	sq_lowPassWeDiv10 : LowpassFilter;
+	sq_lowPass10We : LowpassFilter;	
+	secOrdLagWr : SecondOrderLag;
+	secOrdLagWrDiv10 : SecondOrderLag;
+	secOrdLag10Wr : SecondOrderLag;
+	sinWr : REAL;
+	sinWrDiv10 : REAL;
+	sin10Wr : REAL;
+	dispSecOrdLagWr : REAL;
+	dispSecOrdLagWrDiv10 : REAL;
+	dispSecOrdLag10Wr : REAL;
+	sqWr : REAL;
+	sqWrDiv10 : REAL;
+	sq10Wr : REAL;
+	sq_secOrdLagWr : SecondOrderLag;
+	sq_secOrdLagWrDiv10 : SecondOrderLag;
+	sq_secOrdLag10Wr : SecondOrderLag;
+	sq_dispSecOrdLagWr : REAL;
+	sq_dispSecOrdLagWrDiv10 : REAL;
+	sq_dispSecOrdLag10Wr : REAL;
+	
+	
+END_VAR
+
+VAR CONSTANT
+	ticks : REAL := 1.0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Braucht es verschiedene Instanzen für eine Funktionsblock wenn er mehrfach untersch. verwendet wird?
+getTime(cycleTicks := ticks, actTime => actTime);
+
+// PWM Teste
+pwmTest(dutyCycle := 50.0, A := 1.0, f := 1.0, cycleTicks := ticks, pwm_Signal => DisplayTestPwm);
+
+DisplayTestSquare := SquareSignal(yMin := -1.0, yMAX := 1.0, w := (1.0*pi*2.0), yOffset := 0.0, t := actTime);
+
+pwmFunctDut025(dutyCycle := 0.25, A := 1.0, f := 2.0, cycleTicks := ticks, pwm_Signal => pwm_025);
+pwmFunctDut05(dutyCycle := 0.5, A := 1.0, f := 2.0, cycleTicks := ticks, pwm_Signal => pwm_05);
+pwmFunctDut075(dutyCycle := 0.75, A := 1.0, f := 2.0, cycleTicks := ticks, pwm_Signal => pwm_075);
+
+integrate025(amplitude := pwm_025, cycleTicks := ticks, area => dispIntegrate025);
+integrate05(amplitude := pwm_05, cycleTicks := ticks, area => dispIntegrate05);
+integrate075(amplitude := pwm_075, cycleTicks := ticks, area => dispIntegrate075);
+
+sinWe := SinusFunction(A := 1.0, yOffset := 0.0, w := 1.0/0.1, t := actTime);
+sinWeDiv10 := SinusFunction(A := 1.0, yOffset := 0.0, w := ((1.0/0.1) / 10.0), t := actTime);
+sin10We := SinusFunction(A := 1.0, yOffset := 0.0, w := ((1.0/0.1) * 10.0), t := actTime);
+
+lowPassWe(tau := 0.1, input := sinWe, cycleTicks := ticks, output => dispLowPassWe);
+lowPassWeDiv10(tau := 0.1, input := sinWeDiv10, cycleTicks := ticks, output => dispLowPassWeDiv10);
+lowPass10We(tau := 0.1, input := sin10We, cycleTicks := ticks, output => dispLowPass10We);
+
+sqWe := SquareSignal(yMin := -1.0, yMAX := 1.0, w := 1.0/0.1, yOffset := 0.0, t := actTime);
+sqWeDiv10 := SquareSignal(yMin := -1.0, yMAX := 1.0, w := ((1.0/0.1) / 10.0), yOffset := 0.0, t := actTime);
+sq10We := SquareSignal(yMin := -1.0, yMAX := 1.0, w := ((1.0/0.1) * 10.0), yOffset := 0.0, t := actTime);
+
+sq_lowPassWe(tau := 0.1, input := sqWe, cycleTicks := ticks, output => sq_dispLowPassWe);
+sq_lowPassWeDiv10(tau := 0.1, input := sqWeDiv10, cycleTicks := ticks, output => sq_dispLowPassWeDiv10);
+sq_lowPass10We(tau := 0.1, input := sq10We, cycleTicks := ticks, output => sq_dispLowPass10We);
+
+sinWr := SinusFunction(A := 1.0, yOffset := 0.0, w := 10.0 * SQRT(1-2.0*EXPT(0.2,2)), t := actTime);
+sinWrDiv10 := SinusFunction(A := 1.0, yOffset := 0.0, w := SQRT(1-2.0*EXPT(0.2,2)), t := actTime);
+sin10Wr := SinusFunction(A := 1.0, yOffset := 0.0, w := 10.0 * 10.0 * SQRT(1-2.0*EXPT(0.2,2)), t := actTime);
+
+
+secOrdLagWr(d := 0.2, w0 := 10.0 , input := sinWr, cycleTicks := ticks, output => dispSecOrdLagWr);
+secOrdLagWrDiv10(d := 0.2, w0 := 10.0 , input := sinWrDiv10, cycleTicks := ticks, output => dispSecOrdLagWrDiv10);
+secOrdLag10Wr(d := 0.2, w0 := 10.0 , input := sin10Wr, cycleTicks := ticks, output => dispSecOrdLag10Wr);
+
+sqWr := SquareSignal(yMin := -1.0, yMAX := 1.0, w := 10.0 * SQRT(1-2.0*EXPT(0.2,2)), yOffset := 0.0, t := actTime);
+sqWrDiv10 := SquareSignal(yMin := -1.0, yMAX := 1.0, w := SQRT(1-2.0*EXPT(0.2,2)), yOffset := 0.0, t := actTime);
+sq10Wr := SquareSignal(yMin := -1.0, yMAX := 1.0, w := 10.0 * 10.0 * SQRT(1-2.0*EXPT(0.2,2)), yOffset := 0.0, t := actTime);
+
+sq_secOrdLagWr(d := 0.2, w0 := 10.0 , input := sqWr, cycleTicks := ticks, output => sq_dispSecOrdLagWr);
+sq_secOrdLagWrDiv10(d := 0.2, w0 := 10.0 , input := sqWrDiv10, cycleTicks := ticks, output => sq_dispSecOrdLagWrDiv10);	
+sq_secOrdLag10Wr(d := 0.2, w0 := 10.0 , input := sq10Wr, cycleTicks := ticks, output => sq_dispSecOrdLag10Wr);	
+]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="229" Count="34" />
+      <LineId Id="339" Count="0" />
+      <LineId Id="264" Count="10" />
+      <LineId Id="159" Count="0" />
+      <LineId Id="275" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

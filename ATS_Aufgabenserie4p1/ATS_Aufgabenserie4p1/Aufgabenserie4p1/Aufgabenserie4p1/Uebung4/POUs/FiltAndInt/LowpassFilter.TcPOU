@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="LowpassFilter" Id="{013cb654-0745-4603-9e8d-41a20dfb8ec1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LowpassFilter
+
+VAR_INPUT
+	tau : REAL; // Ungefähr 0.1 testen
+	input : REAL; // Signal
+	cycleTicks : REAL; // Unter SYSTEM -> TASKS eingestellte ticks
+END_VAR
+
+VAR_OUTPUT
+	output : REAL;
+END_VAR
+
+VAR
+	T : REAL ;
+	output_1 : REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[T :=  ((cycleTicks*1.0) / 1000.0);
+output := (T/(T+tau)) * input + (tau/(T+tau)) * output_1;
+output_1 := output;]]></ST>
+    </Implementation>
+    <LineIds Name="LowpassFilter">
+      <LineId Id="3" Count="1" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

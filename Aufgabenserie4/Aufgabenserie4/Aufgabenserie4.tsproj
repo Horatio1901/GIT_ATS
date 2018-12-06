@@ -10,9 +10,12 @@
 		</System>
 		<Plc>
 			<Project GUID="{5DFF9673-78F4-4435-8EE0-229A2DB93B6F}" Name="Aufgabenserie4" PrjFilePath="Aufgabenserie4\Aufgabenserie4.plcproj" TmcFilePath="Aufgabenserie4\Aufgabenserie4.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="Aufgabenserie4\Aufgabenserie4.tmc">
 					<Name>Aufgabenserie4 Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
 				</Instance>
 			</Project>
 		</Plc>

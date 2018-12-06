@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="SinusFunction" Id="{e59db478-07c7-4fb1-a0f8-5383e0b8798e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION SinusFunction : REAL
+VAR_INPUT
+	A : REAL;
+	yOffset : REAL;
+	w : REAL;
+	t : REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[SinusFunction := A * SIN(w*t) + yOffset;]]></ST>
+    </Implementation>
+    <LineIds Name="SinusFunction">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

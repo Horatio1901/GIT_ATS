@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="EdgeDetectorWithDoubleTap" Id="{e0129b7a-61f8-455b-9b0f-48e46b2ff259}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK EdgeDetectorWithDoubleTap
+VAR_INPUT
+	inputValue : BOOL;
+	timeBetweenTwoPresses : REAL; // in ms
+END_VAR
+VAR_OUTPUT
+	risingEdge : BOOL;
+	fallingEdge : BOOL;
+	doubleTap : BOOL;
+END_VAR
+VAR
+	oldSigVal : BOOL;
+	timeCount : REAL;
+	firstPress: BOOL := FALSE;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF oldSigVal <> inputValue THEN
+	IF inputValue = TRUE THEN
+		IF firstPress = FALSE OR timeCount > timeBetweenTwoPresses THEN
+		timeCount := 0.0;
+		risingEdge := TRUE;
+		firstPress := TRUE;
+		ELSIF firstPress = TRUE AND timeCount < timeBetweenTwoPresses THEN
+		doubleTap := TRUE;
+		risingEdge := TRUE;
+		timeCount := 0.0;
+		END_IF
+	ELSE
+		risingEdge := FALSE;					
+	END_IF
+	fallingEdge := NOT risingEdge;
+	oldSigVal := inputValue;
+ELSE
+	doubleTap := FALSE;
+	risingEdge := FALSE;
+	fallingEdge := FALSE;
+END_IF
+timeCount := timeCount + 1.0;]]></ST>
+    </Implementation>
+    <LineIds Name="EdgeDetectorWithDoubleTap">
+      <LineId Id="3" Count="20" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

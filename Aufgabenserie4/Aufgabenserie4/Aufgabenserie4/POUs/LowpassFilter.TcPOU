@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <POU Name="LowpassFilter" Id="{3c208087-fc2a-4825-b1f0-f09fa7e5ce23}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK LowpassFilter
+VAR_INPUT
+	r_Input : REAL;
+	r_Tao : REAL;
+END_VAR
+VAR_OUTPUT
+	r_Output : REAL;
+END_VAR
+VAR
+	r_Output_k1 : REAL;
+	r_Time : REAL := 0.01;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[r_Output := (r_Input + (r_Input*r_Tao/r_Time))/(1+r_Tao/r_Time);
+r_Output_k1 := r_Output;]]></ST>
+    </Implementation>
+    <LineIds Name="LowpassFilter">
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

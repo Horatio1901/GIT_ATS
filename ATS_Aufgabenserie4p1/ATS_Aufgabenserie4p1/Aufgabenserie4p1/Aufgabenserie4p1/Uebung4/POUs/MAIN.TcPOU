@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <POU Name="MAIN" Id="{f0f32a86-36f3-4cce-be2a-598cc49d724c}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	blueButtonDetector : EdgeDetectorWithDoubleTap;
+	yellowButtonDetector : EdgeDetectorWithDoubleTap;
+	
+	lowPass : LowpassFilter;
+	lowPassSinus : LowpassFilter;
+	secondOrder : SecondOrderLag;
+	displayLowpass : REAL;
+	btnToReal : REAL;
+	displaySecondOrder : REAL;
+	actTime : REAL := 0.0;
+	sinus_Singal : REAL;
+	square_Signal : REAL;
+	pwm_Signal : REAL;
+	sinus_SinlowPassSinusgal : REAL;
+	integrate : Integrator;
+	integrate2 : Integrator;
+	risingEdgeLock : BOOL;
+	rise : BOOL;
+	displayIntegralOfSinus : REAL;
+	displayIntegralOfSquare : REAL;
+	displayLowpassSinus : REAL;
+	currTime : GetTime;
+END_VAR
+VAR CONSTANT
+	//T : REAL := 10.0 / 1000.0;
+	omega : REAL := PI;
+	ticks : REAL := 1.0;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[blueButtonDetector(inputValue := blueButton, timeBetweenTwoPresses := 2000, risingEdge => rise);
+IF rise THEN
+	risingEdgeLock := TRUE;
+END_IF
+
+
+(*
+Dürfen der Ausgang eines Funktionsblocks und die Variable auf die
+dieser Ausgnag zugeweisen wird gleich heissen ???
+*)
+currTime(cycleTicks := ticks, actTime => actTime);
+// Erzeugt einen Step beim Drücken eines Knopfes
+IF blueButton OR yellowButton THEN
+	btnToReal := 1.0;
+ELSE
+	btnToReal := 0.0;
+END_IF
+//displayLowpass auf Scope anzeigen
+//lowPass(tau := 0.1,input := btnToReal,cycleTicks := ticks,output => displayLowpass);
+//displaySecondOrder auf Scope anzeigen
+
+
+//sinus_Singal := SinusFunction(A := 1.0, yOffset := 0.0, w := omega, t := actTime); 
+square_Signal := SquareSignal(yMin := -1.0, yMax := 1.0, w := omega, yOffset := 0.0, t := actTime);
+secondOrder(d := 0.001, w0 := 10, input := btnToReal,cycleTicks := ticks, output => displaySecondOrder);
+//pwm_Signal := PWM_Function(cycleTicks := ticks, A := 1.0, t := actTime, f := 10.0,dutyCycle := 30.0);
+//displayIntegralOfSinus auf Scope anzeigen
+//integrate(amplitude := sinus_Singal,cycleTicks := ticks, area => displayIntegralOfSinus);
+//displayIntegralOfSquare auf Scope anzeigen
+// Müssen für diese zwei Zeilen wirklich 2 Instanzen von integrate erstellt werden?
+//integrate2(amplitude := square_Signal,cycleTicks := ticks, area => displayIntegralOfSquare);
+//sinus_SinlowPassSinusgal := SinusFunction(A := 1.0,yOffset := 0.0,w := 1.0 ,t := actTime);
+//lowPassSinus(tau := 0.1,input := sinus_SinlowPassSinusgal,cycleTicks := ticks, output => displayLowpassSinus);
+
+// Erstellen einer Bibliothek: https://infosys.beckhoff.com/index.php?content=../content/1031/tc3_plc_intro/9007203443996043.html&id=]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="29" Count="1" />
+      <LineId Id="82" Count="3" />
+      <LineId Id="31" Count="17" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="49" Count="7" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
